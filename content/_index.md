@@ -19,18 +19,16 @@ roles:
   - "thinking about making a blog"
   - "wondering if they should make a blog"
 
-# Service links. `resolve: true` => dev-URL rewrite applies client-side.
+# Service links. Prod URLs; auto-mapped to dev paths under `hugo server`.
 links:
   - label: "Roll Initiative"
     href: "https://dnd.bluefox.cafe"
     sub: "Foundry VTT"
     primary: true
     faIcon: "fa-solid fa-dice-d20"
-    resolve: true
   - label: "Files"
     href: "https://files.bluefox.cafe"
     icon: "📁"
-    resolve: true
   - label: "GitHub"
     href: "https://github.com/biscuitvixen"
     icon: "🐙"

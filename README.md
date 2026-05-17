@@ -7,13 +7,17 @@ pages).
 ## Structure
 
 - `layouts/_default/baseof.html` - shared `<head>`: builds one fingerprinted,
-  minified CSS bundle (Tailwind + theme + Font Awesome) and the piped
-  `theme.js`. All pages extend this.
+  minified CSS bundle (Tailwind + theme + Font Awesome). All pages extend this;
+  per-page scripts go in the `scripts` block. No JS asset pipeline.
 - `layouts/partials/seo.html` - description / Open Graph / Twitter meta,
   driven by the `description` and `og` front matter.
-- `layouts/partials/vue.html` - self-hosted Vue 3, included by the two Vue pages.
-- `layouts/index.html` - homepage (Vue app).
-- `layouts/dnd/single.html` - the `/dnd/` hub (Vue app); driven by the
+- `layouts/partials/resolve-url.html` - maps a production URL to its local
+  dev-server path under `hugo server` (via `params.devUrls` in `hugo.toml`);
+  passes through untouched on a production build.
+- `layouts/partials/link-rows.html` - reusable tool/operation link rows.
+- `layouts/index.html` - homepage; Hugo-rendered, with an inline vanilla
+  rotator script (no framework).
+- `layouts/dnd/single.html` - the `/dnd/` hub, Hugo-rendered; driven by the
   `content/dnd.md` leaf page (`type: dnd`).
 - `layouts/previews/single.html` - the per-service "sign in with Discord"
   pages. One template, content driven by front matter.
@@ -46,9 +50,10 @@ docker compose up serve            # local preview on http://localhost:1313
   webfont in `static/fonts/fa-solid-900.woff2` is subset to those glyphs
   (~1.5 KB, was ~156 KB).
 - The three are concatenated → minified → fingerprinted into one stylesheet.
-- **JS**: `assets/js/theme.js` only (dev-URL rewrite map + `data-resolve`
-  handler), piped through `js.Build` and fingerprinted. No runtime framework;
-  the homepage rotator is an inline script in `layouts/index.html`.
+- **JS**: none in the asset pipeline. Dev-URL rewriting is done at build time
+  by the `resolve-url.html` partial (driven by `params.devUrls` in
+  `hugo.toml`), not client-side JS. No runtime framework; the homepage rotator
+  is an inline script in `layouts/index.html`.
 
 To re-vendor a dependency (Font Awesome / Cinzel) or re-subset the FA font,
 run the fetch/`pyftsubset` commands inside `docker compose run --rm tool`.
@@ -68,10 +73,11 @@ landing page and the child pages are reached only by direct URL.
 
 ## Notes
 
-- `assets/js/theme.js` contains the dev-URL rewrite map (production
-  subdomains -> local Hugo paths, e.g. `/previews/...`, `/dnd/`). Keep it in
-  sync with Hugo's output paths if content sections move. It is inert in
-  production (only active off `*.bluefox.cafe`).
+- The dev-URL rewrite map lives in `[params.devUrls]` in `hugo.toml`
+  (production subdomains -> local Hugo paths, e.g. `/previews/...`, `/dnd/`),
+  applied by the `resolve-url.html` partial. Keep it in sync with Hugo's
+  output paths if content sections move. It is applied only under
+  `hugo server`; a production build emits the real URLs untouched.
 - Some `og:image` references (`dnd.png`, `files.png`, `beastworld.png`) were
   carried over verbatim from the original HTML; those image files were not
   present in the source and are not included here.

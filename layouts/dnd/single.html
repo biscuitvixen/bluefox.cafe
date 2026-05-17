@@ -2,7 +2,7 @@
     <div class="max-w-3xl mx-auto px-6 py-10">
 
         <!-- Back to home -->
-        <a href="https://bluefox.cafe" data-resolve
+        <a href="{{ partial "resolve-url.html" "https://bluefox.cafe" }}"
            class="group inline-flex items-center gap-2 mb-6 text-sm text-white/45 hover:text-white transition-colors">
             <i class="fa-solid fa-arrow-left transition-transform group-hover:-translate-x-0.5"></i>
             bluefox.cafe
@@ -31,7 +31,7 @@
             <h2 class="text-xs uppercase tracking-[0.2em] text-white/40 mb-3 px-1">Games</h2>
             <div class="flex flex-col gap-3">
                 {{ range .Params.games }}
-                <a href="{{ .href }}" data-resolve
+                <a href="{{ partial "resolve-url.html" .href }}"
                    class="group relative block overflow-hidden rounded-2xl bg-sides ring-1 ring-white/5
                           shadow-float transition-all duration-200
                           hover:-translate-y-0.5 hover:shadow-lift hover:ring-eyes/40">
@@ -56,7 +56,7 @@
         <section class="mb-10">
             <h2 class="text-xs uppercase tracking-[0.2em] text-white/40 mb-3 px-1">Tools</h2>
             <div class="flex flex-col gap-1.5">
-                {{ partial "link-rows.html" (dict "items" .Params.tools "resolve" true) }}
+                {{ partial "link-rows.html" (dict "items" .Params.tools) }}
             </div>
         </section>
     </div>

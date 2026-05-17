@@ -1,8 +1,8 @@
 {{/* Compact link-row list.
-     Context: { items: slice of {name, icon, desc, href}, resolve: bool }
-     resolve=true adds data-resolve so the client-side dev-URL rewrite applies. */}}
+     Context: { items: slice of {name, icon, desc, href} }
+     hrefs are resolved to dev paths at build time under `hugo server`. */}}
 {{ range .items }}
-<a href="{{ .href }}"{{ if $.resolve }} data-resolve{{ end }}
+<a href="{{ partial "resolve-url.html" .href }}"
    class="group flex items-center gap-3 px-4 py-2.5 rounded-lg
           bg-sides/40 ring-1 ring-white/5
           hover:bg-sides hover:ring-white/10 transition-all duration-150">

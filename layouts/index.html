@@ -31,7 +31,7 @@
             <!-- Services -->
             <nav class="flex flex-col gap-3">
                 {{ range .Params.links }}
-                <a href="{{ .href }}"{{ if .resolve }} data-resolve{{ end }}
+                <a href="{{ partial "resolve-url.html" .href }}"
                    class="group relative block px-5 py-3.5 rounded-xl font-medium
                           shadow-float transition-all duration-200
                           hover:-translate-y-0.5 hover:shadow-lift
@@ -64,7 +64,7 @@
                     <span class="text-[10px] normal-case tracking-wide text-eyes/70">admin</span>
                 </h2>
                 <div class="flex flex-col gap-1.5">
-                    {{ partial "link-rows.html" (dict "items" .Params.ops "resolve" false) }}
+                    {{ partial "link-rows.html" (dict "items" .Params.ops) }}
                 </div>
             </section>
 

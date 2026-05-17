@@ -6,6 +6,16 @@ title = "bluefox.cafe"
 disableKinds = ["taxonomy", "term", "RSS", "sitemap"]
 enableRobotsTXT = false
 
+# Production URL -> local dev path. Applied at build time by the
+# resolve-url partial, but ONLY when running under `hugo server`
+# (hugo.IsServer). A production build emits the real URLs untouched.
+[params.devUrls]
+"https://bluefox.cafe"           = "/"
+"https://dnd.bluefox.cafe"       = "/dnd/"
+"https://demiplane.bluefox.cafe" = "/previews/demiplane/"
+"https://beastworld.bluefox.cafe" = "/previews/beastworld/"
+"https://files.bluefox.cafe"     = "/previews/files/"
+
 [markup.goldmark.renderer]
 # Pages are authored as HTML in front matter / layouts.
 unsafe = true

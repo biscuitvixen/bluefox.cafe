@@ -16,8 +16,6 @@
     {{ $css := slice $tw $theme $fa | resources.Concat "css/bundle.css" | minify | fingerprint }}
     <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
 
-    {{ $themeJs := resources.Get "js/theme.js" | js.Build (dict "minify" true) | fingerprint }}
-    <script src="{{ $themeJs.RelPermalink }}" integrity="{{ $themeJs.Data.Integrity }}"></script>
     {{ block "head" . }}{{ end }}
 </head>
 <body class="font-sans">

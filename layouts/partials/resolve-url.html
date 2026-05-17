@@ -1,0 +1,8 @@
+{{/* Resolve a production URL to its local dev-server path.
+     Input: the production URL string. Returns it unchanged on a
+     production build; under `hugo server` it's mapped through
+     params.devUrls (URLs with no mapping pass through as-is).
+     Usage: href="{{ partial "resolve-url.html" "https://dnd.bluefox.cafe" }}" */}}
+{{ $url := . }}
+{{ if hugo.IsServer }}{{ $url = index site.Params.devUrls . | default . }}{{ end }}
+{{ return $url }}
