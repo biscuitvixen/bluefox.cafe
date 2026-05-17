@@ -1,0 +1,16 @@
+baseURL = "https://bluefox.cafe/"
+languageCode = "en"
+title = "bluefox.cafe"
+
+# This is a set of small bespoke pages, not a blog.
+disableKinds = ["taxonomy", "term", "RSS", "sitemap"]
+enableRobotsTXT = false
+
+[markup.goldmark.renderer]
+# Pages are authored as HTML in front matter / layouts.
+unsafe = true
+
+[outputs]
+home = ["HTML"]
+section = ["HTML"]
+page = ["HTML"]

@@ -1,0 +1,11 @@
+{{ define "main" }}
+    <main class="max-w-md mx-auto px-6 py-16 text-center">
+        <div class="text-6xl mb-5">{{ .Params.emoji }}</div>
+        <h1 class="text-3xl font-bold tracking-tight mb-2">{{ .Params.heading }}</h1>
+        <p class="text-white/65 text-sm mb-6">{{ .Params.blurb }}</p>
+        <a href="{{ .Params.signin }}"
+           class="inline-block px-5 py-2.5 rounded-xl bg-belly text-white font-medium shadow-float hover:brightness-110">
+            Sign in →
+        </a>
+    </main>
+{{ end }}
