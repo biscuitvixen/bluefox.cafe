@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+/* Hugo writes hugo_stats.json (build.buildStats) listing every tag/class/id
+   that appears in rendered output — including classes the error template
+   composes dynamically (text-belly / text-eyes). Tailwind scans it instead
+   of the templates. The inline safelist is belt-and-suspenders. */
+@source "hugo_stats.json";
+@source inline("text-belly text-eyes");
+
+/* Design tokens — previously injected at runtime by static/shared/theme.js
+   (window.tailwind.config). Now compiled in. */
+@theme {
+  --color-sides:  #302f39; /* card surface   */
+  --color-lining: #1e1d28; /* page background */
+  --color-belly:  #497bd6; /* primary accent (blue)   */
+  --color-eyes:   #24d962; /* secondary accent (green) */
+
+  --shadow-float: 0 8px 24px -10px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  --shadow-lift:  0 20px 44px -14px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(73, 123, 214, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  --animate-pulse-dot: pulse-dot 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1;   transform: scale(1);    }
+  50%      { opacity: 0.4; transform: scale(0.75); }
+}

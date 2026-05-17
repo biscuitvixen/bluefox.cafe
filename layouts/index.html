@@ -1,5 +1,5 @@
 {{ define "head" }}
-    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    {{ partial "vue.html" . }}
     <style>
         /* Status line: old phrase slides out left, new one slides in from right. */
         .slide-enter-active,

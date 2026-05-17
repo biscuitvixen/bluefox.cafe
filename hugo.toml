@@ -10,6 +10,23 @@ enableRobotsTXT = false
 # Pages are authored as HTML in front matter / layouts.
 unsafe = true
 
+# Emit hugo_stats.json so Tailwind (css.Tailwind) can scan the classes
+# actually used in rendered output instead of guessing from templates.
+[build.buildStats]
+enable = true
+
+[[build.cachebusters]]
+source = 'assets/notwatching/hugo_stats\.json'
+target = 'css'
+
+[[build.cachebusters]]
+source = '(postcss|tailwind)\.config\.js'
+target = 'css'
+
+[[build.cachebusters]]
+source = 'assets/.*\.(css|js)'
+target = 'css'
+
 [outputs]
 home = ["HTML"]
 section = ["HTML"]

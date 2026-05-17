@@ -1,6 +1,6 @@
 ---
 title: "Errors"
-_build:
+build:
   render: never
   list: never
 ---

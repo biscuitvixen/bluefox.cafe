@@ -1,0 +1,3 @@
+{{- /* Self-hosted Vue 3 (was unpkg CDN). Prod build, already minified. */ -}}
+{{- $vue := resources.Get "js/vue.global.prod.js" | fingerprint -}}
+<script src="{{ $vue.RelPermalink }}" integrity="{{ $vue.Data.Integrity }}"></script>

@@ -1,5 +1,6 @@
 /* Shared theme tokens + base styles for *.bluefox.cafe pages.
-   Palette mirrors theme.js so non-Tailwind CSS can use it too. */
+   Palette mirrors the Tailwind @theme in main.css so non-Tailwind CSS
+   can use it too. */
 :root {
     --sides:  #302f39;
     --lining: #1e1d28;
@@ -9,6 +10,22 @@
     /* The site is authored dark. Declaring it gives dark native
        controls/scrollbars and avoids a white flash before CSS loads. */
     color-scheme: dark;
+}
+
+/* Self-hosted Cinzel Decorative (was Google Fonts CDN). Used on /dnd/. */
+@font-face {
+    font-family: "Cinzel Decorative";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(/fonts/cinzel-decorative-700.woff2) format("woff2");
+}
+@font-face {
+    font-family: "Cinzel Decorative";
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url(/fonts/cinzel-decorative-900.woff2) format("woff2");
 }
 
 /* Page background - same gradient on every site.
