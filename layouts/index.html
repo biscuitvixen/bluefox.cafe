@@ -64,17 +64,7 @@
                     <span class="text-[10px] normal-case tracking-wide text-eyes/70">admin</span>
                 </h2>
                 <div class="flex flex-col gap-1.5">
-                    {{ range .Params.ops }}
-                    <a href="{{ .href }}"
-                       class="group flex items-center gap-3 px-4 py-2.5 rounded-lg
-                              bg-sides/40 ring-1 ring-white/5
-                              hover:bg-sides hover:ring-white/10 transition-all duration-150">
-                        <div class="text-base w-5 text-center">{{ .icon }}</div>
-                        <div class="font-medium text-sm">{{ .name }}</div>
-                        <div class="text-xs text-white/40 truncate">{{ .desc }}</div>
-                        <div class="ml-auto text-white/30 group-hover:text-eyes transition-colors text-sm">→</div>
-                    </a>
-                    {{ end }}
+                    {{ partial "link-rows.html" (dict "items" .Params.ops "resolve" false) }}
                 </div>
             </section>
 
