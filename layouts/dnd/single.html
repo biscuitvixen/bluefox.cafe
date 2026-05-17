@@ -1,12 +1,8 @@
-{{ define "head" }}
-    {{ partial "vue.html" . }}
-{{ end }}
-
 {{ define "main" }}
-    <div id="app" class="max-w-3xl mx-auto px-6 py-10">
+    <div class="max-w-3xl mx-auto px-6 py-10">
 
         <!-- Back to home -->
-        <a :href="resolveUrl('https://bluefox.cafe')"
+        <a href="https://bluefox.cafe" data-resolve
            class="group inline-flex items-center gap-2 mb-6 text-sm text-white/45 hover:text-white transition-colors">
             <i class="fa-solid fa-arrow-left transition-transform group-hover:-translate-x-0.5"></i>
             bluefox.cafe
@@ -34,9 +30,8 @@
         <section class="mb-10">
             <h2 class="text-xs uppercase tracking-[0.2em] text-white/40 mb-3 px-1">Games</h2>
             <div class="flex flex-col gap-3">
-                <a v-for="game in games"
-                   :key="game.href"
-                   :href="resolveUrl(game.href)"
+                {{ range .Params.games }}
+                <a href="{{ .href }}" data-resolve
                    class="group relative block overflow-hidden rounded-2xl bg-sides ring-1 ring-white/5
                           shadow-float transition-all duration-200
                           hover:-translate-y-0.5 hover:shadow-lift hover:ring-eyes/40">
@@ -45,14 +40,15 @@
                          style="background: linear-gradient(180deg, #497bd6, #24d962);
                                 opacity: 0.7;"></div>
                     <div class="flex items-center gap-5 p-6 pl-7">
-                        <div class="text-4xl">{{`{{ game.icon }}`}}</div>
+                        <div class="text-4xl">{{ .icon }}</div>
                         <div class="min-w-0 flex-1">
-                            <div class="font-semibold text-lg">{{`{{ game.name }}`}}</div>
-                            <div class="text-sm text-white/55 mt-0.5">{{`{{ game.desc }}`}}</div>
+                            <div class="font-semibold text-lg">{{ .name }}</div>
+                            <div class="text-sm text-white/55 mt-0.5">{{ .desc }}</div>
                         </div>
                         <div class="text-white/30 group-hover:text-eyes group-hover:translate-x-1 transition-all text-xl">→</div>
                     </div>
                 </a>
+                {{ end }}
             </div>
         </section>
 
@@ -60,41 +56,18 @@
         <section class="mb-10">
             <h2 class="text-xs uppercase tracking-[0.2em] text-white/40 mb-3 px-1">Tools</h2>
             <div class="flex flex-col gap-1.5">
-                <a v-for="tool in tools"
-                   :key="tool.href"
-                   :href="resolveUrl(tool.href)"
+                {{ range .Params.tools }}
+                <a href="{{ .href }}" data-resolve
                    class="group flex items-center gap-3 px-4 py-2.5 rounded-lg
                           bg-sides/40 ring-1 ring-white/5
                           hover:bg-sides hover:ring-white/10 transition-all duration-150">
-                    <div class="text-base w-5 text-center">{{`{{ tool.icon }}`}}</div>
-                    <div class="font-medium text-sm">{{`{{ tool.name }}`}}</div>
-                    <div class="text-xs text-white/40 truncate">{{`{{ tool.desc }}`}}</div>
+                    <div class="text-base w-5 text-center">{{ .icon }}</div>
+                    <div class="font-medium text-sm">{{ .name }}</div>
+                    <div class="text-xs text-white/40 truncate">{{ .desc }}</div>
                     <div class="ml-auto text-white/30 group-hover:text-eyes transition-colors text-sm">→</div>
                 </a>
+                {{ end }}
             </div>
         </section>
     </div>
-{{ end }}
-
-{{ define "scripts" }}
-    <script>
-        const { createApp } = Vue;
-
-        createApp({
-            data() {
-                return {
-                    games: [
-                        { name: 'The Demiplane', icon: '⚔️', desc: 'Escaping Fate - the last living kingdom', href: 'https://demiplane.bluefox.cafe' },
-                        { name: 'Beastworld', icon: '🐾', desc: 'Foundry VTT campaign', href: 'https://beastworld.bluefox.cafe' },
-                    ],
-                    tools: [
-                        { name: 'Files', icon: '📁', desc: 'Shared module & asset library', href: 'https://files.bluefox.cafe' },
-                    ],
-                };
-            },
-            methods: {
-                resolveUrl(url) { return devUrls.resolve(url); },
-            },
-        }).mount('#app');
-    </script>
 {{ end }}

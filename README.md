@@ -46,19 +46,25 @@ docker compose up serve            # local preview on http://localhost:1313
   webfont in `static/fonts/fa-solid-900.woff2` is subset to those glyphs
   (~1.5 KB, was ~156 KB).
 - The three are concatenated → minified → fingerprinted into one stylesheet.
-- **Vue 3** is vendored to `assets/js/vue.global.prod.js`, served fingerprinted.
+- **JS**: `assets/js/theme.js` only (dev-URL rewrite map + `data-resolve`
+  handler), piped through `js.Build` and fingerprinted. No runtime framework;
+  the homepage rotator is an inline script in `layouts/index.html`.
 
-To re-vendor a dependency (Vue / Font Awesome / Cinzel) or re-subset the FA
-font, run the fetch/`pyftsubset` commands inside `docker compose run --rm tool`.
+To re-vendor a dependency (Font Awesome / Cinzel) or re-subset the FA font,
+run the fetch/`pyftsubset` commands inside `docker compose run --rm tool`.
 
 ## Output paths
 
 | Source                       | Built path              |
 |------------------------------|-------------------------|
 | `content/_index.md`          | `/`                     |
-| `content/dnd/_index.md`      | `/dnd/`                 |
+| `content/dnd.md`             | `/dnd/`                 |
 | `content/previews/*.md`      | `/previews/<name>/`     |
 | `content/errors/*.md`        | `/errors/<code>/`       |
+
+The `previews` and `errors` sections set `build.render: never` /
+`list: never` in their `_index.md`, so `/previews/` and `/errors/` have no
+landing page and the child pages are reached only by direct URL.
 
 ## Notes
 

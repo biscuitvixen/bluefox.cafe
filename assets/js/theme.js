@@ -14,3 +14,12 @@ window.devUrls = {
     _isDev: !window.location.hostname.endsWith('bluefox.cafe'),
     resolve(url) { return this._isDev ? (this._map[url] ?? url) : url; },
 };
+
+// Rewrite any <a data-resolve> href through the dev-URL map. Hugo renders
+// the production URL; this adjusts it client-side only when off-domain.
+// (Replaces the per-link resolveUrl() calls the old Vue app did.)
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('a[data-resolve]').forEach(function (a) {
+        a.href = window.devUrls.resolve(a.getAttribute('href'));
+    });
+});
