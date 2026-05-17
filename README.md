@@ -68,10 +68,10 @@ landing page and the child pages are reached only by direct URL.
 
 ## Notes
 
-- `assets/js/theme.js` contains the dev-URL rewrite map (`/preview/...`,
-  `/dnd`). That map targets the old Caddy dev layout; adjust it if the dev
-  routing changes. It is inert in production (only active off
-  `*.bluefox.cafe`).
+- `assets/js/theme.js` contains the dev-URL rewrite map (production
+  subdomains -> local Hugo paths, e.g. `/previews/...`, `/dnd/`). Keep it in
+  sync with Hugo's output paths if content sections move. It is inert in
+  production (only active off `*.bluefox.cafe`).
 - Some `og:image` references (`dnd.png`, `files.png`, `beastworld.png`) were
   carried over verbatim from the original HTML; those image files were not
   present in the source and are not included here.

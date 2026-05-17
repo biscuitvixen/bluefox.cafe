@@ -6,10 +6,10 @@
 window.devUrls = {
     _map: {
         'https://bluefox.cafe':              '/',
-        'https://dnd.bluefox.cafe':          '/dnd',
-        'https://demiplane.bluefox.cafe':    '/preview/demiplane/',
-        'https://beastworld.bluefox.cafe':   '/preview/beastworld/',
-        'https://files.bluefox.cafe':        '/preview/files/',
+        'https://dnd.bluefox.cafe':          '/dnd/',
+        'https://demiplane.bluefox.cafe':    '/previews/demiplane/',
+        'https://beastworld.bluefox.cafe':   '/previews/beastworld/',
+        'https://files.bluefox.cafe':        '/previews/files/',
     },
     _isDev: !window.location.hostname.endsWith('bluefox.cafe'),
     resolve(url) { return this._isDev ? (this._map[url] ?? url) : url; },
