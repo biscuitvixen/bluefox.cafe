@@ -10,6 +10,10 @@ services:
     build: .
     image: bluefox-cafe-tool
     working_dir: /src
+    # Run as the host user so public/, resources/ and .hugo_build.lock
+    # come back host-owned instead of root-owned. Defaults to 1000:1000
+    # override with `UID=$(id -u) GID=$(id -g)`.
+    user: "${UID:-1000}:${GID:-1000}"
     volumes:
       - .:/src
     entrypoint: []

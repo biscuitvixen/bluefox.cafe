@@ -38,6 +38,14 @@ docker compose run --rm build      # build the site -> public/
 docker compose up serve            # local preview on http://localhost:1313
 ```
 
+The image is pinned by digest (`hugomods/hugo:exts-0.154.5`) and the Tailwind
+release is pinned to a tagged version, so a rebuild can't silently change the
+toolchain or the rendered output; bump these deliberately in the `Dockerfile`.
+The container runs as the host user (`user:` in `docker-compose.yml`, default
+`1000:1000`) so `public/`, `resources/` and `.hugo_build.lock` come back
+host-owned. If your host UID/GID isn't 1000, run with
+`UID=$(id -u) GID=$(id -g) docker compose ...`.
+
 ### Asset pipeline (Hugo Pipes — no runtime CDNs)
 
 - **Tailwind**: `assets/css/main.css` (`@import "tailwindcss"` + `@theme`
