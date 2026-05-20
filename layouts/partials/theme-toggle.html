@@ -1,0 +1,40 @@
+<button id="theme-toggle" type="button" aria-label="Switch theme"
+        class="fixed top-4 right-4 z-50 w-10 h-10 rounded-full bg-sides text-white
+               ring-1 ring-white/10 shadow-float
+               flex items-center justify-center
+               transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift hover:ring-eyes/50">
+    <svg id="theme-toggle-icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+         fill="currentColor" class="w-5 h-5" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>
+    </svg>
+    <svg id="theme-toggle-icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+         class="w-5 h-5 hidden" aria-hidden="true">
+        <circle cx="12" cy="12" r="4" fill="currentColor"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+    </svg>
+</button>
+<script>
+    (function () {
+        var btn = document.getElementById('theme-toggle');
+        var moon = document.getElementById('theme-toggle-icon-moon');
+        var sun = document.getElementById('theme-toggle-icon-sun');
+        if (!btn || !moon || !sun) return;
+
+        function sync(theme) {
+            var isLight = theme === 'light';
+            moon.classList.toggle('hidden', isLight);
+            sun.classList.toggle('hidden', !isLight);
+            btn.setAttribute('aria-label', isLight ? 'Switch to dark theme' : 'Switch to light theme');
+        }
+
+        sync(document.documentElement.dataset.theme || 'dark');
+
+        btn.addEventListener('click', function () {
+            var next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+            document.documentElement.dataset.theme = next;
+            try { localStorage.setItem('theme', next); } catch (e) {}
+            sync(next);
+        });
+    })();
+</script>

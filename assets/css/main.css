@@ -25,3 +25,29 @@
   0%, 100% { opacity: 1;   transform: scale(1);    }
   50%      { opacity: 0.4; transform: scale(0.75); }
 }
+
+/* Light-mode overrides for the Tailwind color tokens — these back the
+   bg-sides / bg-belly / text-eyes / etc. utilities compiled from @theme. */
+:root[data-theme="light"] {
+  --color-sides:  #f1f1f4;
+  --color-lining: #e6e6ec;
+  --color-belly:  #2f5fc4;
+  --color-eyes:   #1aa84d;
+}
+
+/* Light-mode overrides for the white/opacity utilities used throughout the
+   templates. Dark mode is untouched. Color is #1e1d28 (--lining dark value)
+   at the same alpha steps the templates use. */
+:root[data-theme="light"] .text-white         { color: #1e1d28; }
+:root[data-theme="light"] .text-white\/75     { color: rgb(30 29 40 / 0.85); }
+:root[data-theme="light"] .text-white\/65     { color: rgb(30 29 40 / 0.78); }
+:root[data-theme="light"] .text-white\/60     { color: rgb(30 29 40 / 0.75); }
+:root[data-theme="light"] .text-white\/55     { color: rgb(30 29 40 / 0.70); }
+:root[data-theme="light"] .text-white\/50     { color: rgb(30 29 40 / 0.65); }
+:root[data-theme="light"] .text-white\/45     { color: rgb(30 29 40 / 0.60); }
+:root[data-theme="light"] .text-white\/40     { color: rgb(30 29 40 / 0.55); }
+:root[data-theme="light"] .text-white\/30     { color: rgb(30 29 40 / 0.45); }
+:root[data-theme="light"] .text-white\/25     { color: rgb(30 29 40 / 0.40); }
+:root[data-theme="light"] .bg-white\/\[0\.03\] { background-color: rgb(30 29 40 / 0.05); }
+:root[data-theme="light"] .ring-white\/10     { --tw-ring-color: rgb(30 29 40 / 0.12); }
+:root[data-theme="light"] .ring-white\/5      { --tw-ring-color: rgb(30 29 40 / 0.08); }
