@@ -79,6 +79,47 @@ The `previews` and `errors` sections set `build.render: never` /
 `list: never` in their `_index.md`, so `/previews/` and `/errors/` have no
 landing page and the child pages are reached only by direct URL.
 
+## Public vs gated content (read before adding files)
+
+Caddy's front-end design relies on a hard split between paths that are
+served publicly from every subdomain and paths that are served only
+behind a Discord-guild auth gate. The split is a property of the build
+tree, not of any per-file config — so anything you add under the public
+paths is publicly readable from the moment it deploys, including from
+gated subdomains' URLs (e.g. `dnd.bluefox.cafe/css/secret.css`).
+
+**Always public, from every subdomain, no auth:**
+
+- `/css/*` — fingerprinted style bundles
+- `/fonts/*` — webfonts (Cinzel, FA subset)
+- `/shared/*` — OG cover images and any other cross-subdomain media
+
+Caddy serves these via `handle_path` blocks that run *before* the auth
+gate. Treat the entire output of these three trees as a public CDN.
+Never put secrets, gated game data, draft writeups, anything member-only
+in them — even if the only link to the file is in a private template.
+
+**Public to known crawler bots (Discord, Telegram, Slack, etc.), no auth:**
+
+- `/previews/<name>/` — the per-service sign-in / link-preview pages
+
+These are served unauthenticated when the request `User-Agent` matches a
+known bot. The User-Agent check is trivially spoofable, so functionally
+this tree is "public to anyone who sets a Discord-bot UA." Keep these
+pages limited to title, blurb, OG image — never real game content.
+
+**Gated (auth required):**
+
+- `/<game>/` (`/dnd/`, `/beastworld/`, ...) — served only at that game's
+  subdomain, only to users in the gating Discord guild.
+- `/errors/<code>/` — public output, but only ever served as a rendered
+  error response by Caddy, never linked directly.
+
+If a new section needs to be gated, it must live at its own top-level
+path (`/<name>/`) and Caddy must add a matching `gated_static_site` or
+`gated_proxy_site` block — public paths above are not a place to put
+"semi-private" content.
+
 ## Notes
 
 - The dev-URL rewrite map lives in `[params.devUrls]` in `hugo.toml`
