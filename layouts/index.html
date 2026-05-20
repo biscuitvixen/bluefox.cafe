@@ -35,12 +35,12 @@
                    class="group relative block px-5 py-3.5 rounded-xl font-medium
                           shadow-float transition-all duration-200
                           hover:-translate-y-0.5 hover:shadow-lift
-                          {{ if .primary }}bg-belly text-fg hover:brightness-110{{ else }}bg-sides text-fg ring-1 ring-fg/5 hover:ring-eyes/50{{ end }}">
+                          {{ if .primary }}bg-belly text-white hover:brightness-110{{ else }}bg-sides text-fg ring-1 ring-fg/5 hover:ring-eyes/50{{ end }}">
                     <span class="flex w-full items-center gap-2">
                         {{ with .faIcon }}<i class="{{ . }} text-lg"></i>
                         {{ else }}{{ with .icon }}<span class="text-lg">{{ . }}</span>{{ end }}{{ end }}
                         {{ .label }}
-                        {{ with .sub }}<span class="text-fg/40 text-xs font-normal">{{ . }}</span>{{ end }}
+                        {{ if .sub }}<span class="{{ if .primary }}on-primary-sub{{ else }}text-fg/40{{ end }} text-xs font-normal">{{ .sub }}</span>{{ end }}
                         {{ if .primary }}<span class="ml-auto transition-transform group-hover:translate-x-1">→</span>{{ end }}
                     </span>
                 </a>

@@ -13,8 +13,8 @@
 }
 
 :root[data-theme="light"] {
-    --sides:  #f1f1f4;
-    --lining: #e6e6ec;
+    --sides:  #c9ccd4;
+    --lining: #eef0f4;
     --belly:  #2f5fc4;
     --eyes:   #1aa84d;
     color-scheme: light;

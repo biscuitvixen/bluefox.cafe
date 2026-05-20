@@ -30,9 +30,18 @@
 /* Light-mode palette. Templates use semantic utilities (bg-sides, text-fg/60,
    ring-fg/10, …) backed by these tokens, so this is the only place colors
    need to flip. */
+/* Subtitle on top of a solid colored button (e.g. bg-belly). Always white,
+   but at a softer alpha in dark mode and a slightly stronger one in light
+   mode where the blue is darker and the eye reads it as more recessed. */
+.on-primary-sub { color: rgb(255 255 255 / 0.45); }
+:root[data-theme="light"] .on-primary-sub { color: rgb(255 255 255 / 0.78); }
+
 :root[data-theme="light"] {
-  --color-sides:  #f1f1f4;
-  --color-lining: #e6e6ec;
+  /* Sides is the card surface and sits on top of lining (the body).
+     Keep sides distinctly darker so subtle tints like bg-sides/40 still
+     register against the page background. */
+  --color-sides:  #c9ccd4;
+  --color-lining: #eef0f4;
   --color-belly:  #2f5fc4;
   --color-eyes:   #1aa84d;
   --color-fg:     #1e1d28;
