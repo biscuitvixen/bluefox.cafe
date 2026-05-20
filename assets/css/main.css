@@ -14,6 +14,7 @@
   --color-lining: #1e1d28; /* page background */
   --color-belly:  #497bd6; /* primary accent (blue)   */
   --color-eyes:   #24d962; /* secondary accent (green) */
+  --color-fg:     #ffffff; /* foreground (text/rings) — flips per theme */
 
   --shadow-float: 0 8px 24px -10px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.04);
   --shadow-lift:  0 20px 44px -14px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(73, 123, 214, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.06);
@@ -26,28 +27,13 @@
   50%      { opacity: 0.4; transform: scale(0.75); }
 }
 
-/* Light-mode overrides for the Tailwind color tokens — these back the
-   bg-sides / bg-belly / text-eyes / etc. utilities compiled from @theme. */
+/* Light-mode palette. Templates use semantic utilities (bg-sides, text-fg/60,
+   ring-fg/10, …) backed by these tokens, so this is the only place colors
+   need to flip. */
 :root[data-theme="light"] {
   --color-sides:  #f1f1f4;
   --color-lining: #e6e6ec;
   --color-belly:  #2f5fc4;
   --color-eyes:   #1aa84d;
+  --color-fg:     #1e1d28;
 }
-
-/* Light-mode overrides for the white/opacity utilities used throughout the
-   templates. Dark mode is untouched. Color is #1e1d28 (--lining dark value)
-   at the same alpha steps the templates use. */
-:root[data-theme="light"] .text-white         { color: #1e1d28; }
-:root[data-theme="light"] .text-white\/75     { color: rgb(30 29 40 / 0.85); }
-:root[data-theme="light"] .text-white\/65     { color: rgb(30 29 40 / 0.78); }
-:root[data-theme="light"] .text-white\/60     { color: rgb(30 29 40 / 0.75); }
-:root[data-theme="light"] .text-white\/55     { color: rgb(30 29 40 / 0.70); }
-:root[data-theme="light"] .text-white\/50     { color: rgb(30 29 40 / 0.65); }
-:root[data-theme="light"] .text-white\/45     { color: rgb(30 29 40 / 0.60); }
-:root[data-theme="light"] .text-white\/40     { color: rgb(30 29 40 / 0.55); }
-:root[data-theme="light"] .text-white\/30     { color: rgb(30 29 40 / 0.45); }
-:root[data-theme="light"] .text-white\/25     { color: rgb(30 29 40 / 0.40); }
-:root[data-theme="light"] .bg-white\/\[0\.03\] { background-color: rgb(30 29 40 / 0.05); }
-:root[data-theme="light"] .ring-white\/10     { --tw-ring-color: rgb(30 29 40 / 0.12); }
-:root[data-theme="light"] .ring-white\/5      { --tw-ring-color: rgb(30 29 40 / 0.08); }

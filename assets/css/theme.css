@@ -6,7 +6,6 @@
     --lining: #1e1d28;
     --belly:  #497bd6;
     --eyes:   #24d962;
-    --text:   #ffffff;
 
     /* Dark is the default; the [data-theme="light"] block below overrides
        for users who toggle it (preference resolved pre-paint in baseof.html). */
@@ -18,7 +17,6 @@
     --lining: #e6e6ec;
     --belly:  #2f5fc4;
     --eyes:   #1aa84d;
-    --text:   #1e1d28;
     color-scheme: light;
 }
 
@@ -45,7 +43,7 @@ body {
         radial-gradient(120% 80% at 50% -10%, rgba(73,123,214,0.16) 0%, transparent 60%),
         linear-gradient(to bottom, var(--sides), var(--lining)) fixed;
     background-attachment: fixed;
-    color: var(--text);
+    color: var(--color-fg);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     min-height: 100vh;

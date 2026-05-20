@@ -3,13 +3,13 @@
 
         <!-- Back to home -->
         <a href="{{ partial "resolve-url.html" "https://bluefox.cafe" }}"
-           class="group inline-flex items-center gap-2 mb-6 text-sm text-white/45 hover:text-white transition-colors">
+           class="group inline-flex items-center gap-2 mb-6 text-sm text-fg/45 hover:text-fg transition-colors">
             <i class="fa-solid fa-arrow-left transition-transform group-hover:-translate-x-0.5"></i>
             bluefox.cafe
         </a>
 
         <!-- Header / hero -->
-        <header class="hero-card relative overflow-hidden rounded-3xl mb-10 p-8 ring-1 ring-white/10 shadow-float">
+        <header class="hero-card relative overflow-hidden rounded-3xl mb-10 p-8 ring-1 ring-fg/10 shadow-float">
             <div class="orb-eyes absolute -top-16 -right-16 w-56 h-56 rounded-full opacity-55 blur-3xl"></div>
             <div class="orb-belly absolute -bottom-16 -left-16 w-56 h-56 rounded-full opacity-50 blur-3xl"></div>
 
@@ -21,18 +21,18 @@
                     style="font-family: 'Cinzel Decorative', serif; letter-spacing: 0.02em;">Roll Initiative</h1>
                 <div class="flex items-center justify-center gap-2">
                     <span class="inline-block w-2 h-2 rounded-full bg-eyes shadow-[0_0_10px_rgba(36,217,98,0.8)] animate-[pulse-dot_2.5s_ease-in-out_infinite]"></span>
-                    <span class="text-xs uppercase tracking-[0.2em] text-white/60">authenticated</span>
+                    <span class="text-xs uppercase tracking-[0.2em] text-fg/60">authenticated</span>
                 </div>
             </div>
         </header>
 
         <!-- Games - full-width prominent cards -->
         <section class="mb-10">
-            <h2 class="text-xs uppercase tracking-[0.2em] text-white/40 mb-3 px-1">Games</h2>
+            <h2 class="text-xs uppercase tracking-[0.2em] text-fg/40 mb-3 px-1">Games</h2>
             <div class="flex flex-col gap-3">
                 {{ range .Params.games }}
                 <a href="{{ partial "resolve-url.html" .href }}"
-                   class="group relative block overflow-hidden rounded-2xl bg-sides ring-1 ring-white/5
+                   class="group relative block overflow-hidden rounded-2xl bg-sides ring-1 ring-fg/5
                           shadow-float transition-all duration-200
                           hover:-translate-y-0.5 hover:shadow-lift hover:ring-eyes/40">
                     <!-- Left accent stripe - belly blue, fades to nothing -->
@@ -43,9 +43,9 @@
                         <div class="text-4xl">{{ .icon }}</div>
                         <div class="min-w-0 flex-1">
                             <div class="font-semibold text-lg">{{ .name }}</div>
-                            <div class="text-sm text-white/55 mt-0.5">{{ .desc }}</div>
+                            <div class="text-sm text-fg/55 mt-0.5">{{ .desc }}</div>
                         </div>
-                        <div class="text-white/30 group-hover:text-eyes group-hover:translate-x-1 transition-all text-xl">→</div>
+                        <div class="text-fg/30 group-hover:text-eyes group-hover:translate-x-1 transition-all text-xl">→</div>
                     </div>
                 </a>
                 {{ end }}
@@ -54,7 +54,7 @@
 
         <!-- Tools - member-accessible utilities -->
         <section class="mb-10">
-            <h2 class="text-xs uppercase tracking-[0.2em] text-white/40 mb-3 px-1">Tools</h2>
+            <h2 class="text-xs uppercase tracking-[0.2em] text-fg/40 mb-3 px-1">Tools</h2>
             <div class="flex flex-col gap-1.5">
                 {{ partial "link-rows.html" (dict "items" .Params.tools) }}
             </div>
