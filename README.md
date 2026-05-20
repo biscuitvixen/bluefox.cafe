@@ -91,3 +91,35 @@ landing page and the child pages are reached only by direct URL.
   present in the source and are not included here.
 - Error pages are emitted under `/errors/`, mirroring the old `caddy/errors/`
   layout, so the deploy script can wire them into Caddy as before.
+
+## Deploy
+
+`make deploy` invokes `deploy.sh`. Configure via `.env` (copied from
+`.env.example`); environment variables override it.
+
+```sh
+cp .env.example .env       # then edit HOST / PATH
+make deploy                # uses .env
+DEPLOY_HOST= make deploy   # one-off: publish locally
+```
+
+Mode is derived from `DEPLOY_HOST`: set means remote (ssh + rsync over
+Tailscale), unset means local (publish to `$DEPLOY_PATH` on this host).
+
+Config (`.env` keys, also accepted as environment):
+
+- `DEPLOY_HOST` — tailnet hostname of the VPS; unset for local mode
+- `DEPLOY_PATH` — base dir Caddy serves from (default `/srv/bluefox`)
+
+Layout under `$DEPLOY_PATH`:
+
+```
+current -> releases/<timestamp>/   # symlink served by Caddy
+releases/<timestamp>/              # last 5 retained
+```
+
+Each run builds in the pinned container toolchain, rsyncs `public/` to
+a new `releases/<timestamp>/`, then flips `current` with a single
+`ln -sfn`. The flip is atomic and Caddy is not restarted. In remote
+mode the transport is SSH over Tailscale; port 22 on the VPS is not
+exposed to the internet.

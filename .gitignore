@@ -3,3 +3,6 @@
 /resources/
 /hugo_stats.json
 .hugo_build.lock
+
+# Local deploy config (see .env.example).
+.env
