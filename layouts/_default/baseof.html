@@ -6,14 +6,15 @@
     {{/* Both schemes declared so extensions like Dark Reader know the site
          supports light mode and don't apply their own filter on top. */}}
     <meta name="color-scheme" content="light dark">
-    {{/* Resolve theme before paint to avoid a flash. localStorage wins;
-         otherwise follow the OS preference, defaulting to dark. */}}
+    {{/* Resolve theme before paint to avoid a flash. The 'theme' cookie is
+         scoped to .bluefox.cafe so the preference is shared across
+         subdomains (set by partials/theme-toggle.html). Falls back to the
+         OS preference, then dark. */}}
     <script>
         (function () {
             try {
-                var saved = localStorage.getItem('theme');
-                var theme = saved === 'light' || saved === 'dark'
-                    ? saved
+                var m = document.cookie.match(/(?:^|;\s*)theme=(light|dark)/);
+                var theme = m ? m[1]
                     : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
                 document.documentElement.dataset.theme = theme;
             } catch (e) {
