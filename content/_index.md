@@ -29,14 +29,6 @@ links:
     sub: "Foundry VTT"
     primary: true
     faIcon: "fa-solid fa-dice-d20"
-  - label: "Projects"
-    href: "#"
-    sub: "soon"
-    icon: "🛠️"
-  - label: "Blog"
-    href: "#"
-    sub: "soon"
-    icon: "📝"
   - label: "Art"
     href: "#"
     sub: "soon"
@@ -50,6 +42,15 @@ quicklinks:
   - label: "GitHub"
     href: "https://github.com/biscuitvixen"
     icon: "🐙"
+
+# Contact / socials - small buttons in their own section above Ops.
+contact:
+  - label: "Telegram"
+    href: "https://t.me/biscuit_fox"
+    svg: "icons/telegram.svg"
+  - label: "Discord"
+    href: "https://discordapp.com/users/biscuit_fox"
+    svg: "icons/discord.svg"
 
 # Admin tools - linked directly (no dev-URL rewrite).
 ops:

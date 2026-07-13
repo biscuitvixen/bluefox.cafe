@@ -76,6 +76,12 @@
                 {{ end }}
             </div>
 
+            <!-- Contact - socials, small buttons in their own section -->
+            <section class="mt-8">
+                <h2 class="text-xs uppercase tracking-[0.2em] text-fg/40 mb-3 px-1">Contact</h2>
+                {{ partial "quicklink-row.html" .Params.contact }}
+            </section>
+
             <!-- Ops - compact admin list, kept low-key on a public page -->
             <section class="mt-8">
                 <h2 class="text-xs uppercase tracking-[0.2em] text-fg/40 mb-3 px-1 flex items-center gap-2">

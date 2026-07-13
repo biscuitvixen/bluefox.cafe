@@ -1,0 +1,15 @@
+{{/* One row of small side-by-side utility buttons.
+     Context: a slice of {label, href, and either svg (asset path to an
+     inline brand icon) or icon (emoji)}. hrefs are resolved to dev paths
+     under `hugo server`. */}}
+<div class="flex gap-3">
+    {{ range . }}
+    <a href="{{ partial "resolve-url.html" .href }}"
+       class="group flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg
+              bg-sides/50 ring-1 ring-fg/5 text-sm font-medium text-fg/80
+              hover:bg-sides hover:text-fg hover:ring-eyes/40 transition-all duration-150">
+        {{ with .svg }}{{ (resources.Get .).Content | replaceRE "<svg" `<svg fill="currentColor" width="16" height="16" aria-hidden="true"` | safeHTML }}
+        {{ else }}{{ with .icon }}<span>{{ . }}</span>{{ end }}{{ end }}{{ .label }}
+    </a>
+    {{ end }}
+</div>
