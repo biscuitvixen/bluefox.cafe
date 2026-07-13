@@ -7,7 +7,7 @@ og:
   description: "Sandy's corner of the internet. Tabletop nights and far too many half-built projects."
   image: "https://bluefox.cafe/shared/og/sandy.webp"
   # Processed to a 1200x630 webp by seo.html; falls back to `image` above.
-  imageAsset: "images/biscuit-lofi.png"
+  imageAsset: "images/biscuit-lofi.webp"
 
 # Rotating status line (cycled client-side by a tiny vanilla script).
 roles:

@@ -6,3 +6,6 @@
 
 # Local deploy config (see .env.example).
 .env
+
+# Full-res image sources; the committed webp derivatives are what ship.
+/assets/images/*.png

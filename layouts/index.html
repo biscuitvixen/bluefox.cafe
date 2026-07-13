@@ -8,9 +8,11 @@
 {{ end }}
 
 {{ define "main" }}
-    {{ $banner := resources.Get "images/biscuit-lofi.png" }}
-    {{ $b1 := $banner.Resize "900x webp q80" }}
-    {{ $b2 := $banner.Resize "1600x webp q82" }}
+    {{/* 1600px webp master (committed); the PNG source is kept out of the repo.
+         Downscale for the small srcset; use the master as-is at full width so
+         it isn't re-encoded. */}}
+    {{ $b2 := resources.Get "images/biscuit-lofi.webp" }}
+    {{ $b1 := $b2.Resize "900x webp q80" }}
     <div class="flex flex-col items-center justify-center min-h-screen p-4 sm:p-6 gap-8">
         <!-- Hero - the cozy lofi banner carries the identity -->
         <header class="w-full max-w-2xl">
