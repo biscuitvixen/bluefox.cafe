@@ -46,6 +46,14 @@ body {
         0 20px 50px -16px rgba(0,0,0,0.65);
 }
 
+/* Bottom scrim for the front-page image hero: fades the lower third of the
+   art to near-black so the overlaid title/status stay legible. Kept as plain
+   CSS (not a Tailwind gradient utility) so it's independent of theme flips. */
+.hero-scrim {
+    background: linear-gradient(to top,
+        rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.30) 38%, transparent 68%);
+}
+
 /* Glowing orbs used inside hero cards. */
 .orb-eyes  { background: radial-gradient(circle, var(--color-eyes)  0%, transparent 70%); }
 .orb-belly { background: radial-gradient(circle, var(--color-belly) 0%, transparent 70%); }

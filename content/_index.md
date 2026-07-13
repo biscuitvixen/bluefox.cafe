@@ -1,11 +1,13 @@
 ---
 title: "bluefox.cafe"
-description: "Sandy's corner of the internet. Tabletop nights, glowing fursuit electronics, and far too many half-built projects."
+description: "Sandy's corner of the internet. Tabletop nights and far too many half-built projects."
 og:
   url: "https://bluefox.cafe"
   title: "bluefox.cafe"
-  description: "Sandy's corner of the internet. Tabletop nights, glowing fursuit electronics, and far too many half-built projects."
+  description: "Sandy's corner of the internet. Tabletop nights and far too many half-built projects."
   image: "https://bluefox.cafe/shared/og/sandy.webp"
+  # Processed to a 1200x630 webp by seo.html; falls back to `image` above.
+  imageAsset: "images/biscuit-lofi.png"
 
 # Rotating status line (cycled client-side by a tiny vanilla script).
 roles:
@@ -19,21 +21,35 @@ roles:
   - "thinking about making a blog"
   - "wondering if they should make a blog"
 
-# Service links. Prod URLs; auto-mapped to dev paths under `hugo server`.
+# Main links. Prod URLs; auto-mapped to dev paths under `hugo server`.
+# The '#' ones are placeholders for pages I haven't built yet.
 links:
   - label: "Roll Initiative"
     href: "https://dnd.bluefox.cafe"
     sub: "Foundry VTT"
     primary: true
     faIcon: "fa-solid fa-dice-d20"
+  - label: "Projects"
+    href: "#"
+    sub: "soon"
+    icon: "🛠️"
+  - label: "Blog"
+    href: "#"
+    sub: "soon"
+    icon: "📝"
+  - label: "Art"
+    href: "#"
+    sub: "soon"
+    icon: "🎨"
+
+# Small utility buttons beneath the main links.
+quicklinks:
   - label: "Files"
     href: "https://files.bluefox.cafe"
     icon: "📁"
   - label: "GitHub"
     href: "https://github.com/biscuitvixen"
     icon: "🐙"
-
-soon: ["Projects", "Blog", "Art"]
 
 # Admin tools - linked directly (no dev-URL rewrite).
 ops:
