@@ -21,7 +21,7 @@
                      srcset="{{ $b1.RelPermalink }} 900w, {{ $b2.RelPermalink }} 1600w"
                      sizes="(max-width: 640px) 100vw, 42rem"
                      width="{{ $b2.Width }}" height="{{ $b2.Height }}"
-                     alt="Sandy the blue fox soldering a keyboard at their desk on a moonlit night"
+                     alt="Sandy, a blue and black fox with white hair and headphones, soldering a keyboard at a cozy desk on a moonlit night"
                      loading="eager" decoding="async"
                      class="w-full aspect-[16/9] object-cover object-center">
 
@@ -38,6 +38,13 @@
                         <span id="role" class="block">{{ index .Params.roles 0 }}</span>
                     </p>
                 </div>
+
+                <!-- Artist credit, overlaid on the bottom-right of the art. Inline
+                     styles so the overlay never depends on Tailwind class generation. -->
+                <p style="position:absolute;right:1.25rem;bottom:1rem;margin:0;font-size:0.75rem;line-height:1;color:rgba(255,255,255,0.7);text-shadow:0 1px 3px rgba(0,0,0,0.65)">
+                    Art by <a href="https://www.beffumsartworks.com/" target="_blank" rel="noopener"
+                              style="color:#ffffff;text-decoration:underline;text-underline-offset:2px">beffums</a>
+                </p>
             </div>
         </header>
 
