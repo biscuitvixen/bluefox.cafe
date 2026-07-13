@@ -49,7 +49,7 @@ contact:
     href: "https://t.me/biscuit_fox"
     svg: "icons/telegram.svg"
   - label: "Discord"
-    href: "https://discordapp.com/users/biscuit_fox"
+    href: "https://discord.com/users/228574936157913088"
     svg: "icons/discord.svg"
 
 # Admin tools - linked directly (no dev-URL rewrite).
