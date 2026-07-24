@@ -59,5 +59,15 @@
                 {{ partial "link-rows.html" (dict "items" .Params.tools) }}
             </div>
         </section>
+
+        <!-- Service health - Kuma status page, gated by the same policy as this page -->
+        {{ with .Params.status }}
+        <section class="mb-10">
+            <h2 class="text-xs uppercase tracking-[0.2em] text-fg/40 mb-3 px-1">Service Health</h2>
+            <div class="flex flex-col gap-1.5">
+                {{ partial "link-rows.html" (dict "items" .) }}
+            </div>
+        </section>
+        {{ end }}
     </div>
 {{ end }}

@@ -58,6 +58,15 @@ host-owned. If your host UID/GID isn't 1000, run with
   webfont in `static/fonts/fa-solid-900.woff2` is subset to those glyphs
   (~1.5 KB, was ~156 KB).
 - The three are concatenated → minified → fingerprinted into one stylesheet.
+- **Inline SVG icons**: `assets/icons/*.svg`, inlined by the `inline-svg.html`
+  partial, which forces `fill="currentColor"` so they follow the theme. Because
+  the injected attributes are placed first (HTML keeps the first of a duplicated
+  attribute), **only fill-based icons work**: a stroke-based icon
+  (`fill="none" stroke="currentColor"`, e.g. anything from Lucide/Feather) gets
+  overridden to a solid fill and renders as a blob. Sources:
+  - `discord.svg`, `telegram.svg`: [Simple Icons](https://simpleicons.org) (CC0).
+  - `activity.svg`: [Bootstrap Icons](https://icons.getbootstrap.com) v1.13.1
+    (MIT, © 2019-2024 The Bootstrap Authors).
 - **JS**: none in the asset pipeline. Dev-URL rewriting is done at build time
   by the `resolve-url.html` partial (driven by `params.devUrls` in
   `hugo.toml`), not client-side JS. No runtime framework; the homepage rotator
