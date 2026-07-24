@@ -31,6 +31,12 @@ rel="$(date -u +%Y%m%d-%H%M%S)"
 echo "==> building site in the pinned container toolchain"
 docker compose run --rm build
 
+# Gate: never publish a build that would violate the strict CSP (inline
+# styles/scripts, or a bootstrap hash that no longer matches the Caddyfile).
+# set -e aborts the deploy on failure, before anything is published.
+echo "==> checking the build for CSP violations"
+"$repo/bin/check-build.sh"
+
 # Mode-specific bindings. `run` executes a shell command on the target
 # (local sh or remote ssh); `dest` is the rsync destination prefix;
 # `where` is a human label for logs. The publish sequence below is
@@ -51,3 +57,16 @@ rsync -a --delete public/ "$dest"
 run "ln -sfn '$base/releases/$rel' '$base/current' \
   && ls -1dt '$base'/releases/*/ | tail -n +6 | xargs -r rm -rf"
 echo "==> live: $where/current -> releases/$rel"
+
+# Post-deploy: verify the live security posture (headers, gating, CORS). Local
+# mode only, where the edge check and the live site are both reachable.
+# Non-fatal - the build was already gated above, so a failure here points at
+# Caddy rather than content; warn loudly instead of rolling back.
+sec="${SECURITY_CHECK:-$HOME/fox_cafe/prod/security/security-check.sh}"
+if [ -z "$host" ] && [ -x "$sec" ]; then
+    echo "==> verifying live security posture"
+    "$sec" "${DEPLOY_DOMAIN:-bluefox.cafe}" || {
+        echo "!! SECURITY CHECK FAILED after deploy - investigate now."
+        echo "   rollback: ln -sfn \"\$(ls -1dt '$base'/releases/*/ | sed -n 2p)\" '$base/current'"
+    }
+fi

@@ -1,0 +1,24 @@
+name: ci
+
+# Pre-merge net for the CSP build guard: build the site with the repo's own
+# pinned toolchain (identical output to deploy.sh) and assert it has no inline
+# styles and only the one known inline bootstrap script. The Caddyfile isn't
+# present here, so check-build.sh skips the hash cross-check; the on-host
+# deploy gate does the authoritative version match.
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build site in the pinned toolchain
+        run: docker compose run --rm build
+      - name: CSP build guard
+        run: bin/check-build.sh
