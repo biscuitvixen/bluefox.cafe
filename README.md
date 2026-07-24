@@ -135,14 +135,18 @@ path (`/<name>/`) and Caddy must add a matching `gated_static_site` or
 
 ## Deploy
 
-`make deploy` invokes `deploy.sh`. Configure via `.env` (copied from
+`deploy.sh` builds and publishes. Configure via `.env` (copied from
 `.env.example`); environment variables override it.
 
 ```sh
-cp .env.example .env       # then edit HOST / PATH
-make deploy                # uses .env
-DEPLOY_HOST= make deploy   # one-off: publish locally
+cp .env.example .env         # then edit HOST / PATH
+sh deploy.sh                 # uses .env
+DEPLOY_HOST= sh deploy.sh    # one-off: publish locally
 ```
+
+The `Makefile` wraps these as `make build` / `make serve` / `make deploy`, but
+`make` is not installed on the deploy host, so the direct commands above and the
+`docker compose` ones in the Build section are what actually run there.
 
 Mode is derived from `DEPLOY_HOST`: set means remote (ssh + rsync over
 Tailscale), unset means local (publish to `$DEPLOY_PATH` on this host).
