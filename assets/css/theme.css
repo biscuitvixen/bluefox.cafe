@@ -61,3 +61,29 @@ body {
 /* Icon drop-shadow glows. */
 .glow-eyes  { filter: drop-shadow(0 0 14px rgba(36,217,98,0.55)); }
 .glow-belly { filter: drop-shadow(0 0 14px rgba(73,123,214,0.70)); }
+
+/* Homepage status-line rotator: old phrase slides out left, new one slides in
+   from the right. Moved out of an inline <style> so style-src can drop
+   'unsafe-inline'. Toggled by the rotator script via .role-enter/.role-leave. */
+#role            { display: block; transition: transform .45s ease, opacity .45s ease; }
+#role.role-leave { transform: translateX(-60%); opacity: 0; }
+#role.role-enter { transform: translateX(60%);  opacity: 0; transition: none; }
+
+/* Front-page banner artist credit, overlaid bottom-right on the art. White is
+   deliberate (overlay on dark artwork), not a theme token. */
+.banner-credit {
+    position: absolute; right: 1.25rem; bottom: 1rem; margin: 0;
+    font-size: 0.75rem; line-height: 1;
+    color: rgba(255,255,255,0.7);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.65);
+}
+.banner-credit a { color: #ffffff; text-decoration: underline; text-underline-offset: 2px; }
+
+/* DnD landing: display-font page title. */
+.dnd-title { font-family: "Cinzel Decorative", serif; letter-spacing: 0.02em; }
+
+/* DnD game-card left accent stripe (belly -> eyes, faded). */
+.dnd-card-stripe {
+    background: linear-gradient(180deg, var(--color-belly), var(--color-eyes));
+    opacity: 0.7;
+}

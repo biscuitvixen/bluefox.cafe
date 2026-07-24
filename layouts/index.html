@@ -1,12 +1,3 @@
-{{ define "head" }}
-    <style>
-        /* Status line: old phrase slides out left, new one slides in from right. */
-        #role            { display: block; transition: transform .45s ease, opacity .45s ease; }
-        #role.role-leave { transform: translateX(-60%); opacity: 0; }
-        #role.role-enter { transform: translateX(60%);  opacity: 0; transition: none; }
-    </style>
-{{ end }}
-
 {{ define "main" }}
     {{/* 1600px webp master (committed); the PNG source is kept out of the repo.
          Downscale for the small srcset; use the master as-is at full width so
@@ -39,11 +30,10 @@
                     </p>
                 </div>
 
-                <!-- Artist credit, overlaid on the bottom-right of the art. Inline
-                     styles so the overlay never depends on Tailwind class generation. -->
-                <p style="position:absolute;right:1.25rem;bottom:1rem;margin:0;font-size:0.75rem;line-height:1;color:rgba(255,255,255,0.7);text-shadow:0 1px 3px rgba(0,0,0,0.65)">
-                    Art by <a href="https://www.beffumsartworks.com/" target="_blank" rel="noopener"
-                              style="color:#ffffff;text-decoration:underline;text-underline-offset:2px">beffums</a>
+                <!-- Artist credit, overlaid on the bottom-right of the art.
+                     Styled in theme.css (.banner-credit) so no inline style. -->
+                <p class="banner-credit">
+                    Art by <a href="https://www.beffumsartworks.com/" target="_blank" rel="noopener">beffums</a>
                 </p>
             </div>
         </header>
