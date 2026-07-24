@@ -19,6 +19,9 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Build site in the pinned toolchain
-        run: docker compose run --rm build
+        # The runner's checkout is owned by uid 1001, not the compose default
+        # of 1000, so the container needs the runner's ids or it can't write
+        # .hugo_build.lock / public/ into the bind mount.
+        run: docker compose run --rm --user "$(id -u):$(id -g)" build
       - name: CSP build guard
         run: bin/check-build.sh
