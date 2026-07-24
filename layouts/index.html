@@ -26,7 +26,7 @@
                     <!-- Rotating status - the one bit of motion on the page -->
                     <p class="mt-3 flex items-center gap-2 text-sm text-eyes h-5 relative overflow-hidden">
                         <span class="w-1.5 h-1.5 rounded-full bg-eyes shrink-0 animate-pulse-dot"></span>
-                        <span id="role" class="block">{{ index .Params.roles 0 }}</span>
+                        <span id="role" class="block" data-roles="{{ .Params.roles | jsonify }}">{{ index .Params.roles 0 }}</span>
                     </p>
                 </div>
 
@@ -100,26 +100,5 @@
 {{ end }}
 
 {{ define "scripts" }}
-    <script>
-        (function () {
-            var roles = {{ .Params.roles | jsonify | safeJS }};
-            var el = document.getElementById('role');
-            if (!el || roles.length < 2) return;
-            var i = 0;
-            setInterval(function () {
-                el.classList.add('role-leave');
-                setTimeout(function () {
-                    i = (i + 1) % roles.length;
-                    el.textContent = roles[i];
-                    el.classList.remove('role-leave');
-                    el.classList.add('role-enter');
-                    requestAnimationFrame(function () {
-                        requestAnimationFrame(function () {
-                            el.classList.remove('role-enter');
-                        });
-                    });
-                }, 450);
-            }, 3200);
-        })();
-    </script>
+    <script src="{{ partial "js-url.html" "js/rotator.js" }}" defer></script>
 {{ end }}

@@ -1,0 +1,9 @@
+{{- /* Given a Pipes resource's RelPermalink (/public_assets/...), return the
+       production asset-host URL with the /public_assets prefix stripped (that
+       prefix is the vhost root on assets.bluefox.cafe), or the real local path
+       under `hugo server`. Usage: {{ partial "asset-url.html" $res.RelPermalink }} */ -}}
+{{- $p := . -}}
+{{- if not hugo.IsServer -}}
+{{- $p = printf "%s%s" site.Params.assetBaseURL (strings.TrimPrefix "/public_assets" $p) -}}
+{{- end -}}
+{{- return $p -}}

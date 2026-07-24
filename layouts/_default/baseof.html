@@ -9,7 +9,9 @@
     {{/* Resolve theme before paint to avoid a flash. The 'theme' cookie is
          scoped to .bluefox.cafe so the preference is shared across
          subdomains (set by partials/theme-toggle.html). Falls back to the
-         OS preference, then dark. */}}
+         OS preference, then dark. This one script stays inline because it must
+         run before paint; it is allowlisted by sha256 in caddy/Caddyfile
+         (static_csp). If you edit it, recompute that hash. */}}
     <script>
         (function () {
             try {
@@ -32,15 +34,7 @@
     {{ $theme := resources.Get "css/theme.css" }}
     {{ $fa := resources.Get "css/fontawesome.css" }}
     {{ $css := slice $tw $theme $fa | resources.Concat "public_assets/css/bundle.css" | minify | fingerprint }}
-    {{/* Prod serves the bundle from assets.bluefox.cafe; the /public_assets
-         prefix is the vhost root there, so strip it. hugo server keeps the
-         real build path. crossorigin is required for cross-origin SRI. */}}
-    {{ $path := $css.RelPermalink }}{{ $base := "" }}
-    {{ if not hugo.IsServer }}
-      {{ $base = site.Params.assetBaseURL }}
-      {{ $path = strings.TrimPrefix "/public_assets" $path }}
-    {{ end }}
-    <link rel="stylesheet" href="{{ $base }}{{ $path }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ partial "asset-url.html" $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
 
     {{ block "head" . }}{{ end }}
 </head>

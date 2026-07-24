@@ -1,0 +1,7 @@
+{{- /* Build a JS file from assets/ into a minified, fingerprinted resource under
+       public_assets/js/ and return its asset-host URL. Arg: source path under
+       assets/, e.g. "js/rotator.js". Usage:
+       <script src="{{ partial "js-url.html" "js/rotator.js" }}" defer></script> */ -}}
+{{- $r := resources.Get . | minify -}}
+{{- $r = slice $r | resources.Concat (printf "public_assets/js/%s" (path.Base .)) | fingerprint -}}
+{{- return (partial "asset-url.html" $r.RelPermalink) -}}
