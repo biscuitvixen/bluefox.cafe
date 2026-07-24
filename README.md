@@ -55,8 +55,8 @@ host-owned. If your host UID/GID isn't 1000, run with
 - **Theme CSS**: `assets/css/theme.css` (hand-written; body gradient,
   `hero-card`, `orb-*`, `glow-*`, self-hosted Cinzel Decorative `@font-face`).
 - **Font Awesome**: `assets/css/fontawesome.css` — only the 7 icons used; the
-  webfont in `static/fonts/fa-solid-900.woff2` is subset to those glyphs
-  (~1.5 KB, was ~156 KB).
+  webfont in `static/public_assets/fonts/fa-solid-900.woff2` is subset to those
+  glyphs (~1.5 KB, was ~156 KB).
 - The three are concatenated → minified → fingerprinted into one stylesheet.
 - **Inline SVG icons**: `assets/icons/*.svg`, inlined by the `inline-svg.html`
   partial, which forces `fill="currentColor"` so they follow the theme. Because
@@ -90,23 +90,24 @@ landing page and the child pages are reached only by direct URL.
 
 ## Public vs gated content (read before adding files)
 
-Caddy's front-end design relies on a hard split between paths that are
-served publicly from every subdomain and paths that are served only
-behind a Discord-guild auth gate. The split is a property of the build
-tree, not of any per-file config — so anything you add under the public
-paths is publicly readable from the moment it deploys, including from
-gated subdomains' URLs (e.g. `dnd.bluefox.cafe/css/secret.css`).
+Caddy's front-end design relies on a hard split between assets that are
+served publicly and content that is served only behind a Discord-guild
+auth gate. The split is a property of the build tree, not of any per-file
+config — so anything you add under the public tree is publicly readable
+from the moment it deploys.
 
-**Always public, from every subdomain, no auth:**
+**Always public, no auth — served by `assets.bluefox.cafe`:**
 
-- `/css/*` — fingerprinted style bundles
-- `/fonts/*` — webfonts (Cinzel, FA subset)
-- `/shared/*` — OG cover images and any other cross-subdomain media
+- Everything under `static/public_assets/` (webfonts, `shared/` OG cover
+  images) plus the fingerprinted CSS bundle (built to `public_assets/css/`).
+  This is the theme CSS, fonts, and share images every page links.
 
-Caddy serves these via `handle_path` blocks that run *before* the auth
-gate. Treat the entire output of these three trees as a public CDN.
-Never put secrets, gated game data, draft writeups, anything member-only
-in them — even if the only link to the file is in a private template.
+Caddy serves this from a dedicated public host rooted at
+`current/public_assets`; gated subdomains do **not** serve `/css`, `/fonts`
+or `/shared` at all. Reference these assets via `params.assetBaseURL` (see
+`baseof.html`), never root-relative. Treat the whole `public_assets/` tree
+as a public CDN: never put secrets, gated game data, draft writeups or
+anything member-only in it — even if the only link is in a private template.
 
 **Public to known crawler bots (Discord, Telegram, Slack, etc.), no auth:**
 
@@ -126,7 +127,7 @@ pages limited to title, blurb, OG image — never real game content.
 
 If a new section needs to be gated, it must live at its own top-level
 path (`/<name>/`) and Caddy must add a matching `gated_static_site` or
-`gated_proxy_site` block — public paths above are not a place to put
+`gated_proxy_site` block — the public asset tree is not a place to put
 "semi-private" content.
 
 ## Notes

@@ -6,6 +6,11 @@ title = "bluefox.cafe"
 disableKinds = ["taxonomy", "term", "RSS", "sitemap"]
 enableRobotsTXT = false
 
+[params]
+# Public asset host (theme CSS, webfonts, OG images). Prefixed onto asset
+# URLs only in production builds; hugo server uses local paths.
+assetBaseURL = "https://assets.bluefox.cafe"
+
 # Production URL -> local dev path. Applied at build time by the
 # resolve-url partial, but ONLY when running under `hugo server`
 # (hugo.IsServer). A production build emits the real URLs untouched.

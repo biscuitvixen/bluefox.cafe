@@ -9,5 +9,5 @@ og:
   url: "https://demiplane.bluefox.cafe"
   title: "Escaping Fate · bluefox.cafe"
   description: "Your world is dying. The Last Living Kingdom holds out against creatures from beyond reality while the great heroes stand watch at the Great Gate."
-  image: "https://bluefox.cafe/shared/og/demiplane-banner.webp"
+  image: "https://assets.bluefox.cafe/shared/og/demiplane-banner.webp"
 ---

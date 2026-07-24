@@ -9,5 +9,5 @@ og:
   url: "https://dnd.bluefox.cafe"
   title: "DnD · bluefox.cafe"
   description: "The Bluefox Cafe DnD hub - campaigns, tools, and shared assets for the table."
-  image: "https://bluefox.cafe/shared/og/dnd.png"
+  image: "https://assets.bluefox.cafe/shared/og/dnd.png"
 ---

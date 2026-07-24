@@ -9,5 +9,5 @@ og:
   url: "https://beastworld.bluefox.cafe"
   title: "Beastworld · bluefox.cafe"
   description: "Beastworld - a Foundry VTT campaign on bluefox.cafe."
-  image: "https://bluefox.cafe/shared/og/beastworld.png"
+  image: "https://assets.bluefox.cafe/shared/og/beastworld.png"
 ---

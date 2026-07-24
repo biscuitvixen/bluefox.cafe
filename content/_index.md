@@ -5,7 +5,7 @@ og:
   url: "https://bluefox.cafe"
   title: "bluefox.cafe"
   description: "Sandy's corner of the internet. Tabletop nights and far too many half-built projects."
-  image: "https://bluefox.cafe/shared/og/sandy.webp"
+  image: "https://assets.bluefox.cafe/shared/og/sandy.webp"
   # Processed to a 1200x630 webp by seo.html; falls back to `image` above.
   imageAsset: "images/biscuit-lofi.webp"
 

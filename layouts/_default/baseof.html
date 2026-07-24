@@ -31,8 +31,16 @@
     {{ $tw := resources.Get "css/main.css" | css.TailwindCSS (dict "minify" hugo.IsProduction) }}
     {{ $theme := resources.Get "css/theme.css" }}
     {{ $fa := resources.Get "css/fontawesome.css" }}
-    {{ $css := slice $tw $theme $fa | resources.Concat "css/bundle.css" | minify | fingerprint }}
-    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+    {{ $css := slice $tw $theme $fa | resources.Concat "public_assets/css/bundle.css" | minify | fingerprint }}
+    {{/* Prod serves the bundle from assets.bluefox.cafe; the /public_assets
+         prefix is the vhost root there, so strip it. hugo server keeps the
+         real build path. crossorigin is required for cross-origin SRI. */}}
+    {{ $path := $css.RelPermalink }}{{ $base := "" }}
+    {{ if not hugo.IsServer }}
+      {{ $base = site.Params.assetBaseURL }}
+      {{ $path = strings.TrimPrefix "/public_assets" $path }}
+    {{ end }}
+    <link rel="stylesheet" href="{{ $base }}{{ $path }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
 
     {{ block "head" . }}{{ end }}
 </head>

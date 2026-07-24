@@ -9,5 +9,5 @@ og:
   url: "https://files.bluefox.cafe"
   title: "Files · bluefox.cafe"
   description: "Shared module and asset library for bluefox.cafe games."
-  image: "https://bluefox.cafe/shared/og/files.png"
+  image: "https://assets.bluefox.cafe/shared/og/files.png"
 ---
