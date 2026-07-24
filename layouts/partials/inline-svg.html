@@ -1,0 +1,9 @@
+{{/* Inline an SVG from assets/ at icon size, coloured by currentColor.
+     Input: asset path, e.g. "icons/activity.svg".
+     The injected attributes come first, so they win over any the source
+     file sets (HTML keeps the first of a duplicated attribute), which
+     means fill-based icons only. A stroke-based icon (fill="none")
+     would be overridden to a solid fill and render as a blob. */}}
+{{- (resources.Get .).Content
+    | replaceRE "<svg" `<svg fill="currentColor" width="16" height="16" aria-hidden="true"`
+    | safeHTML -}}
